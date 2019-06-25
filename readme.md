@@ -11,8 +11,9 @@ The three tumor regions consist of the whole tumor (yellow), the tumor core (red
 
 <div id="container">
     <img src="https://www.med.upenn.edu/sbia/assets/user-content/BRATS_tasks.png?raw=true" width="550" height="250" >
-    <center>Different Tumor Classes and Modalities</center>
 </div>
+
+Different Tumor Classes and Modalities
 
 Shown above are image patches that are annotated witht the different types of classes in the different modalities (top left) and the final labels for the whole dataset (right). The image patches show from left to right: the whole tumor (yellow) visible in T2-FLAIR (Fig.A), the tumor core (red) visible in T2 (Fig.B), the enhancing tumor structures (light blue) visible in T1Gd, surrounding the necrotic components of the core (green) (Fig. C). The segmentations are combined to generate the final labels of the tumor sub-regions.
 
