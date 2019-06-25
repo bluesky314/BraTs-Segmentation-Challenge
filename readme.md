@@ -9,7 +9,7 @@ Due to this highly diverse appearance and shape, segmentation of brain tumors in
 
 
 <div id="container">
-    <img src="https://www.med.upenn.edu/sbia/assets/user-content/BRATS_tasks.png?raw=true" width="700" height="466" >
+    <img src="https://www.med.upenn.edu/sbia/assets/user-content/BRATS_tasks.png?raw=true" width="550" height="250" >
     <center>Incremental Learning rules</center>
 </div>
 
