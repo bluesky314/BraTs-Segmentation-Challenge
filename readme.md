@@ -19,7 +19,9 @@ Shown above are image patches that are annotated witht the different types of cl
 
 
 ## Data pre-processing 
-One of the challenges in working with MRI data is dealing with the artifacts produced either by inhomogeneity in the magnetic field or small movements made by the patient during scan time. Oftentimes a bias will be present across the resulting scans, which negatively affect the segmentation results.  We notice that out of 285 total patients, 210 are not much affected by bias correction however 75 are greatly affected indicating a split in distribution in the dataset. Bias correcting raises results on these substantially however it must be notes to not bias correct flair. Many papers recommed different stratgies for bias correction with no consistency. Bias correcting flair will shift its distribution to negatively impact the tumur enhancing and core. We learnt this the hard way. 
+One of the challenges in working with MRI data is dealing with the artifacts produced either by inhomogeneity in the magnetic field or small movements made by the patient during scan time. So, one part of an image might appear lighter or darker when visualized, solely because of variations in the magnetic field. The map of these variations is called the bias field. The bias field can cause problems for a classifier as the variations in signal intensity are not due to any anatomical di↵erences.
+
+Oftentimes a bias will be present across the resulting scans, which negatively affect the segmentation results.  We notice that out of 285 total patients, 210 are not much affected by bias correction however 75 are greatly affected indicating a split in distribution in the dataset. Bias correcting raises results on these substantially however it must be notes to not bias correct flair. Many papers recommed different stratgies for bias correction with no consistency. Bias correcting flair will shift its distribution to negatively impact the tumur enhancing and core. We learnt this the hard way. 
 
 <div id="container">
     <img src="https://github.com/naldeborgh7575/brain_segmentation/blob/master/images/n4_correction.png?raw=true" width="300" height="150" >
