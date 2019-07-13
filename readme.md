@@ -64,6 +64,8 @@ so we use transposed convolutions to better upsample learned feature maps along 
 
 We use 3D convolutional network with a cascade and multi-stage framework to alleviate class imbalance which is the main difficulty in brain tumor segmentation. The enhancing tumor makes _ %, TC _ % and _ and _ .We used the three stages for segmenting whole, core and enhancing tumor region into one cascade structure. In this way, the later stage network can focus on learning difficult features per class. We can also fit the model with reasonable GPU space and alter pre-processing for different tumor regions. We also use the insight of distribution split to change the architecture of of secondary networks. 
 
+Our first network segments the whole tumor and provides a region proposal that is fed into the later cascades. This reduced the memory footprint of the cascades and shows only the relevant regions for quicker learning. Additionally we found using ELU activation function superior to ReLU. For data augmentations we do rotations, random flips and add gaussian noise along with a guassian smoothing filter. We found batch normalization to not work well with the small batch sizes we trained on so we used Instance Norm with much sucess. 
+
 
 We found that significantly fewer resources for understanding image segmentation with CNNs are available, so to that end we made a video explaning incoming researchers about image segmentation in the U-Net: [An in-depth look at image segmentation in modern deep learning architectures through the UNet](https://www.youtube.com/watch?v=NzY5IJodjek)
 
@@ -109,8 +111,11 @@ We see that the gradient term is multiplied by a factor proportional to the loss
 Using 8 models trained on each of the above, we create a ensemble that is able to overcome the data distribution split problem and achives consistent results throughout samples. 
 
 2 models on Dice Loss
+
 2 Models on Tversky loss focusing on FN
+
 2 models on Tversky loss focusing on FP
+
 2 models on Power Loss with n=2
 
 
