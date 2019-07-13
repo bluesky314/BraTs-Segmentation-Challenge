@@ -57,7 +57,7 @@ We employ SITK's bias correction on all T1,T2 and T1CE images.  which removed th
 ## Convolutional Neural Networks
 
 Convolution Neural Networks have proven to be vastly superior to other hand-crafted and learning algorithms for complex feature representation. To this end, we employ a framework based on U-Net  structure proposed by  Ronneberger et  al. which consists  of  a  contracting  path  to  analyze  the  whole  image  and  a  symmetric expanding  path  to  recovery  the  original  resolution. The  U-Net  structure  has  been widely used in the field of medical image segmentationand has achieved competitive performance. Segmentation can be viewed to be a problem that balances global features in a local context
-so we use transposed convolutions to better upsample learned feature maps along the expanding pathway. Severalstudies[14,  15]have demonstratedthat the  3D  versionsof  U-Net architecture using 3D volumes as input can produce better results than entirely 2D architecture. Although 3D U-Nethas good performance, it has more parameters than2D version, and the computational complexity of 3D  model is much higher than that of  2D  model.
+so we use transposed convolutions to better upsample learned feature maps along the expanding pathway. Several studies have demonstrated that the  3D  versionsof  U-Net architecture using 3D volumes as input can produce better results than entirely 2D architecture. Although 3D U-Net has good performance, it has signoficantly more parameters than the 2D version, and therfore higher computational complexity. 
 
 
 ---Unet pic
