@@ -72,13 +72,24 @@ We found that significantly fewer resources for understanding image segmentation
 
 We use a combination of the cross entropy loss and variations of dice loss for training. The dice loss directly optimizes the IoU metric and is know for its superior performance because of how it optimizes the area in segmentation tasks. The dice loss is given by 
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}" title="\mathbf{L}_{d i c e}=1-\mathbf{Dice}_{coef}" /></a>
+
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" title="\mathbf{L}_{d i c e}=1-\frac{2 * \sum p_{t r u e} * p_{p r e d}}{\sum p_{t r u e}^{2}+\sum p_{p r e d}^{2}+\epsilon}" /></a>
 
 An equivalent representation is using True/False Positives/Negatives:
+
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}&space;=1-&space;\frac{2TP}{2TP&plus;FN&plus;FP}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}&space;=1-&space;\frac{2TP}{2TP&plus;FN&plus;FP}" title="\mathbf{L}_{d i c e} =1- \frac{2TP}{2TP+FN+FP}" /></a>
 
-The above expression allows us to weight the false positives or negatives by adding a multiplicative factor to them to account for over or under segmenting. This is the motivation of the [Tversky Loss](https://arxiv.org/abs/1706.05721)
+The above expression allows us to weight the false positives or negatives by adding a multiplicative factor to them to account for over or under segmenting. This is the motivation of the [Tversky Loss:](https://arxiv.org/abs/1706.05721)
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=T(\alpha,&space;\beta)=1&space;-&space;\frac{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}}{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}&plus;\alpha&space;\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{1&space;i}&plus;\beta&space;\sum_{i=1}^{N}&space;p_{1&space;i}&space;g_{0&space;i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?T(\alpha,&space;\beta)=1&space;-&space;\frac{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}}{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}&plus;\alpha&space;\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{1&space;i}&plus;\beta&space;\sum_{i=1}^{N}&space;p_{1&space;i}&space;g_{0&space;i}}" title="T(\alpha, \beta)=1 - \frac{\sum_{i=1}^{N} p_{0 i} g_{0 i}}{\sum_{i=1}^{N} p_{0 i} g_{0 i}+\alpha \sum_{i=1}^{N} p_{0 i} g_{1 i}+\beta \sum_{i=1}^{N} p_{1 i} g_{0 i}}" /></a>
 
+Consider 
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}^n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}^n" title="\mathbf{L}_{d i c e}=1-\mathbf{Dice}_{coef}^n" /></a>
+
+Taking the gradient with respect to any paramater yields:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{d\mathbf{L}_{d&space;i&space;c&space;e}}{dw_i}=-n\mathbf{Dice}^{n-1}_{coef}&space;\frac{d\mathbf{Dice}_{coef}}{dw_i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{d\mathbf{L}_{d&space;i&space;c&space;e}}{dw_i}=-n\mathbf{Dice}^{n-1}_{coef}&space;\frac{d\mathbf{Dice}_{coef}}{dw_i}" title="\frac{d\mathbf{L}_{d i c e}}{dw_i}=-n\mathbf{Dice}^{n-1}_{coef} \frac{d\mathbf{Dice}_{coef}}{dw_i}" /></a>
+
+We see that the gradient term is multiplied by a factor proportional to the loss at that point. So hard samples yielding higher losses will get weighted more in this formulation automatically allowing our model to focus on the minority distribution in the dataset.
