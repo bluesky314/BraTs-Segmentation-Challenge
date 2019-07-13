@@ -77,6 +77,8 @@ We use a combination of the cross entropy loss and variations of dice loss for t
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" title="\mathbf{L}_{d i c e}=1-\frac{2 * \sum p_{t r u e} * p_{p r e d}}{\sum p_{t r u e}^{2}+\sum p_{p r e d}^{2}+\epsilon}" /></a>
 
+While the Cross Entropy Loss is a per pixel loss, the Dice Loss takes a proportion of areas which causes it to behave differently in a few cases. While the Cross Entropy and Dice Loss theoretically try to optimize the same objective, the dice loss gives more importance to samples where less appeal eyes
+
 ### Tversky Loss
 An equivalent representation is using True/False Positives/Negatives:
 
