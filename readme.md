@@ -70,12 +70,14 @@ We found that significantly fewer resources for understanding image segmentation
 
 ## Ensembling and Loss Function
 
+### Dice Loss
 We use a combination of the cross entropy loss and variations of dice loss for training. The dice loss directly optimizes the IoU metric and is know for its superior performance because of how it optimizes the area in segmentation tasks. The dice loss is given by 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}" title="\mathbf{L}_{d i c e}=1-\mathbf{Dice}_{coef}" /></a>
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" title="\mathbf{L}_{d i c e}=1-\frac{2 * \sum p_{t r u e} * p_{p r e d}}{\sum p_{t r u e}^{2}+\sum p_{p r e d}^{2}+\epsilon}" /></a>
 
+### Tversky Loss
 An equivalent representation is using True/False Positives/Negatives:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}&space;=1-&space;\frac{2TP}{2TP&plus;FN&plus;FP}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}&space;=1-&space;\frac{2TP}{2TP&plus;FN&plus;FP}" title="\mathbf{L}_{d i c e} =1- \frac{2TP}{2TP+FN+FP}" /></a>
@@ -84,7 +86,10 @@ The above expression allows us to weight the false positives or negatives by add
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=T(\alpha,&space;\beta)=1&space;-&space;\frac{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}}{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}&plus;\alpha&space;\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{1&space;i}&plus;\beta&space;\sum_{i=1}^{N}&space;p_{1&space;i}&space;g_{0&space;i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?T(\alpha,&space;\beta)=1&space;-&space;\frac{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}}{\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{0&space;i}&plus;\alpha&space;\sum_{i=1}^{N}&space;p_{0&space;i}&space;g_{1&space;i}&plus;\beta&space;\sum_{i=1}^{N}&space;p_{1&space;i}&space;g_{0&space;i}}" title="T(\alpha, \beta)=1 - \frac{\sum_{i=1}^{N} p_{0 i} g_{0 i}}{\sum_{i=1}^{N} p_{0 i} g_{0 i}+\alpha \sum_{i=1}^{N} p_{0 i} g_{1 i}+\beta \sum_{i=1}^{N} p_{1 i} g_{0 i}}" /></a>
 
-Consider 
+Unlike random forest and other high variance classifiers, neural networks are relatively low variance. I.e models trained again and again dont achive much variance in their outputs. Thus we must artifically add factors that differenciate one model from the next so we have a diverse set of models to take advantage of. The above forumlation of the dice allows us to alter the FN and FP weights as hyperparameters to create an array of models that each balance over and under segmentating differently.  
+
+### Power Loss
+If we raise our dice coefficent to a power we can consider what the gradient would look like:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}^n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}^n" title="\mathbf{L}_{d i c e}=1-\mathbf{Dice}_{coef}^n" /></a>
 
