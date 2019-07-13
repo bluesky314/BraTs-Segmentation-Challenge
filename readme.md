@@ -57,18 +57,20 @@ We employ SITK's bias correction on all T1,T2 and T1CE images.  which removed th
 ## Convolutional Neural Networks
 
 Convolution Neural Networks have proven to be vastly superior to other hand-crafted and learning algorithms for complex feature representation. To this end, we employ a framework based on U-Net  structure proposed by  Ronneberger et  al. which consists  of  a  contracting  path  to  analyze  the  whole  image  and  a  symmetric expanding  path  to  recovery  the  original  resolution. The  U-Net  structure  has  been widely used in the field of medical image segmentationand has achieved competitive performance. Segmentation can be viewed to be a problem that balances global features in a local context
-so we use transposed convolutions to better upsample learned feature maps along the expanding pathway. Several studies have demonstrated that the  3D  versionsof  U-Net architecture using 3D volumes as input can produce better results than entirely 2D architecture. Although 3D U-Net has good performance, it has signoficantly more parameters than the 2D version, and therfore higher computational complexity. 
+so we use transposed convolutions to better upsample learned feature maps along the expanding pathway. Several studies have demonstrated that the  3D  versionsof  U-Net architecture using 3D volumes as input can produce better results than entirely 2D architecture. Although 3D U-Net has good performance, it has significantly more parameters than the 2D version, and therfore higher computational complexity. We also use residual connections in each block to facilitate learning.
 
 
 ---Unet pic
 
-We use 3D convolutional network with a cascade and multi-stage framework to alleviate class imbalance which is the main di culty in brain tumor segmentation. The enhancing tumor makes _ %, TC _ % and _ and _ .We used the three stages for segmenting whole, core and enhancing tumor region into one cascade structure. In this way, the later stage network can focus on learning difficult features per class. We can also fit the model with reasonable GPU space and alter pre-processing for different tumor regions. We also use the insight of distribution split to change the architecture of of secondary networks. 
+We use 3D convolutional network with a cascade and multi-stage framework to alleviate class imbalance which is the main difficulty in brain tumor segmentation. The enhancing tumor makes _ %, TC _ % and _ and _ .We used the three stages for segmenting whole, core and enhancing tumor region into one cascade structure. In this way, the later stage network can focus on learning difficult features per class. We can also fit the model with reasonable GPU space and alter pre-processing for different tumor regions. We also use the insight of distribution split to change the architecture of of secondary networks. 
 
 
 We found that significantly fewer resources for understanding image segmentation with CNNs are available, so to that end we made a video explaning incoming researchers about image segmentation in the U-Net: [An in-depth look at image segmentation in modern deep learning architectures through the UNet](https://www.youtube.com/watch?v=NzY5IJodjek)
 
 
 ## Ensembling and Loss Function
+
+As the data has two seperate distributions, training a model with a single loss function leads the model to favor one data distribution over the other. This causes the validation scores to be split among very high results and a few low ones. While this is fine in a competitions where our objective is to maximize the average score, this erodes the trust of our algorithms in practical settings where consistecy is more important that a few points on the average. To this end, we create a diverse set of models using different variants of the dice loss to establish a lower bound on validation performance so our models can be trusted in practical settings.
 
 ### Dice Loss
 We use a combination of the cross entropy loss and variations of dice loss for training. The dice loss directly optimizes the IoU metric and is know for its superior performance because of how it optimizes the area in segmentation tasks. The dice loss is given by 
@@ -77,7 +79,7 @@ We use a combination of the cross entropy loss and variations of dice loss for t
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\frac{2&space;*&space;\sum&space;p_{t&space;r&space;u&space;e}&space;*&space;p_{p&space;r&space;e&space;d}}{\sum&space;p_{t&space;r&space;u&space;e}^{2}&plus;\sum&space;p_{p&space;r&space;e&space;d}^{2}&plus;\epsilon}" title="\mathbf{L}_{d i c e}=1-\frac{2 * \sum p_{t r u e} * p_{p r e d}}{\sum p_{t r u e}^{2}+\sum p_{p r e d}^{2}+\epsilon}" /></a>
 
-While the Cross Entropy Loss is a per pixel loss, the Dice Loss takes a proportion of areas which causes it to behave differently in a few cases. While the Cross Entropy and Dice Loss theoretically try to optimize the same objective, the dice loss gives more importance to samples where less appeal eyes
+While the Cross Entropy Loss is a per pixel loss, the Dice Loss takes a proportion of predicted and true areas which causes it to behave differently in a few cases. While the Cross Entropy and Dice Loss theoretically try to optimize the same objective, the dice loss gives more importance to samples which are less visually consistent by taking the ratio of areas. So, while the Cross Entropy would penalise a small and large target region with only some X pixels incorrect in the same manner, the dice will be more lenient for the larger target as most of the region has been predicted.
 
 ### Tversky Loss
 An equivalent representation is using True/False Positives/Negatives:
@@ -91,7 +93,8 @@ The above expression allows us to weight the false positives or negatives by add
 Unlike random forest and other high variance classifiers, neural networks are relatively low variance. I.e models trained again and again dont achive much variance in their outputs. Thus we must artifically add factors that differenciate one model from the next so we have a diverse set of models to take advantage of. The above forumlation of the dice allows us to alter the FN and FP weights as hyperparameters to create an array of models that each balance over and under segmentating differently.  
 
 ### Power Loss
-If we raise our dice coefficent to a power we can consider what the gradient would look like:
+
+The dice loss is a very linear loss function. If we raise our dice coefficent to a power we can consider what the gradient would look like:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}^n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{L}_{d&space;i&space;c&space;e}=1-\mathbf{Dice}_{coef}^n" title="\mathbf{L}_{d i c e}=1-\mathbf{Dice}_{coef}^n" /></a>
 
@@ -99,4 +102,15 @@ Taking the gradient with respect to any paramater yields:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{d\mathbf{L}_{d&space;i&space;c&space;e}}{dw_i}=-n\mathbf{Dice}^{n-1}_{coef}&space;\frac{d\mathbf{Dice}_{coef}}{dw_i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{d\mathbf{L}_{d&space;i&space;c&space;e}}{dw_i}=-n\mathbf{Dice}^{n-1}_{coef}&space;\frac{d\mathbf{Dice}_{coef}}{dw_i}" title="\frac{d\mathbf{L}_{d i c e}}{dw_i}=-n\mathbf{Dice}^{n-1}_{coef} \frac{d\mathbf{Dice}_{coef}}{dw_i}" /></a>
 
-We see that the gradient term is multiplied by a factor proportional to the loss at that point. So hard samples yielding higher losses will get weighted more in this formulation automatically allowing our model to focus on the minority distribution in the dataset.
+We see that the gradient term is multiplied by a factor proportional to the loss at that point. So hard samples yielding higher losses will get weighted more in this formulation automatically allowing our model to focus on the minority distribution in the dataset. This a similar forumulation to the M.S.E loss which penalizes distances in a non-linear fasion. 
+
+### Ensemble
+
+Using 8 models trained on each of the above, we create a ensemble that is able to overcome the data distribution split problem and achives consistent results throughout samples. 
+
+2 models on Dice Loss
+2 Models on Tversky loss focusing on FN
+2 models on Tversky loss focusing on FP
+2 models on Power Loss with n=2
+
+
