@@ -4,17 +4,13 @@ This repository contains some files from MICCA BraTS segmentation challenge: htt
 
 ## Table of Contents
 1. [Dataset](#dataset)
-2. [MRI Background](#mri-background)
-    * [MRI Pre-Processing](#mri-pre-processing)
-    * [Pulse Sequences](#pulse-sequences)
-    * [Segmentation](#segmentation)
-3. [Data pre-processing](#high-grade-gliomas)
-4. [Convolutional Neural Networks](#convolutional-neural-networks)
+2. [Data pre-processing](#Data pre-processing)
+3. [Convolutional Neural Networks](#Convolutional Neural Networks)
     * [Model Architecture](#model-architecture)
     * [Training the Model](#training-the-model)  
     * [Patch Selection](#patch-selection)
     * [Results](#results)
-5. [Ensembling and Loss Function](#future-directions)
+4. [Ensembling and Loss Function](#Ensembling and Loss Function)
 
 
 ## Dataset
