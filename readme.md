@@ -8,13 +8,13 @@ This repository contains some files from MICCA BraTS segmentation challenge: htt
     * [MRI Pre-Processing](#mri-pre-processing)
     * [Pulse Sequences](#pulse-sequences)
     * [Segmentation](#segmentation)
-3. [High Grade Gliomas](#high-grade-gliomas)
+3. [Data pre-processing](#high-grade-gliomas)
 4. [Convolutional Neural Networks](#convolutional-neural-networks)
     * [Model Architecture](#model-architecture)
     * [Training the Model](#training-the-model)  
     * [Patch Selection](#patch-selection)
     * [Results](#results)
-5. [Future Directions](#future-directions)
+5. [Ensembling and Loss Function](#future-directions)
 
 
 ## Dataset
@@ -57,14 +57,21 @@ We employ SITK's bias correction on all T1,T2 and T1CE images.  which removed th
 ## Convolutional Neural Networks
 
 Convolution Neural Networks have proven to be vastly superior to other hand-crafted and learning algorithms for complex feature representation. To this end, we employ a framework based on U-Net  structure proposed by  Ronneberger et  al. which consists  of  a  contracting  path  to  analyze  the  whole  image  and  a  symmetric expanding  path  to  recovery  the  original  resolution. The  U-Net  structure  has  been widely used in the field of medical image segmentationand has achieved competitive performance. Segmentation can be viewed to be a problem that balances global features in a local context
-so we use transposed convolutions to better upsample learned feature maps along the expanding pathway. Several studies have demonstrated that the  3D  versionsof  U-Net architecture using 3D volumes as input can produce better results than entirely 2D architecture. Although 3D U-Net has good performance, it has significantly more parameters than the 2D version, and therfore higher computational complexity. We also use residual connections in each block to facilitate learning.
+so we use transposed convolutions to better upsample learned feature maps along the expanding pathway. Several studies have demonstrated that the  3D  versionsof  U-Net architecture using 3D volumes as input can produce better results than entirely 2D architecture. Although 3D U-Net has good performance, it has significantly more parameters than the 2D version, and therfore higher computational complexity. 
 
 
----Unet pic
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/unet.png?raw=true" width="550" height="250" >
+</div>
 
 We use 3D convolutional network with a cascade and multi-stage framework to alleviate class imbalance which is the main difficulty in brain tumor segmentation. The enhancing tumor makes _ %, TC _ % and _ and _ .We used the three stages for segmenting whole, core and enhancing tumor region into one cascade structure. In this way, the later stage network can focus on learning difficult features per class. We can also fit the model with reasonable GPU space and alter pre-processing for different tumor regions. We also use the insight of distribution split to change the architecture of of secondary networks. 
 
-Our first network segments the whole tumor and provides a region proposal that is fed into the later cascades. This reduced the memory footprint of the cascades and shows only the relevant regions for quicker learning. Additionally we found using ELU activation function superior to ReLU. For data augmentations we do rotations, random flips and add gaussian noise along with a guassian smoothing filter. We found batch normalization to not work well with the small batch sizes we trained on so we used Instance Norm with much sucess. 
+Our first network segments the whole tumor and provides a region proposal that is fed into the later cascades. This reduced the memory footprint of the cascades and shows only the relevant regions for quicker learning. Additionally we found using ELU activation function superior to ReLU. For data augmentations we do rotations, random flips and add gaussian noise along with a guassian smoothing filter. We found batch normalization to not work well with the small batch sizes we trained on so we used Instance Norm with much sucess. We use [DropBlock](https://arxiv.org/abs/1810.12890) regularization instead of Dropout.We also use residual connections in each block to facilitate learning.
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/residual.png?raw=true" width="550" height="250" >
+</div>
 
 
 We found that significantly fewer resources for understanding image segmentation with CNNs are available, so to that end we made a video explaning incoming researchers about image segmentation in the U-Net: [An in-depth look at image segmentation in modern deep learning architectures through the UNet](https://www.youtube.com/watch?v=NzY5IJodjek)
