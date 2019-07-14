@@ -4,13 +4,13 @@ This repository contains some files from MICCA BraTS segmentation challenge: htt
 
 ## Table of Contents
 1. [Dataset](#dataset)
-2. [Data pre-processing](#Data pre-processing)
-3. [Convolutional Neural Networks](#Convolutional Neural Networks)
+2. [Data Pre-Processing ](#Data-Pre-Processing )
+3. [Convolutional Neural Networks](#Convolutional-Neural-Networks)
     * [Model Architecture](#model-architecture)
     * [Training the Model](#training-the-model)  
     * [Patch Selection](#patch-selection)
     * [Results](#results)
-4. [Ensembling and Loss Function](#Ensembling and Loss Function)
+4. [Ensembling and Loss Function](#Ensembling-and-Loss-Function)
 
 
 ## Dataset
@@ -30,7 +30,7 @@ Shown above are image patches that are annotated witht the different types of cl
 <img alt="3D rendering produced by T2 MRI scan" src="https://github.com/naldeborgh7575/brain_segmentation/blob/master/images/t29_143.gif" width=250>  
 <sub> <b> Figure 2: </b> (Left) Slices are taken axially at 1mm increments, creating a 3-dimensional rendering of the brain. Note that shown above is only one of four pulse sequences used for tumor segmentation. </sub>
 
-## Data pre-processing 
+## Data Pre-Processing 
 One of the challenges in working with MRI data is dealing with the artifacts produced either by inhomogeneity in the magnetic field or small movements made by the patient during scan time. So, one part of an image might appear lighter or darker when visualized solely because of variations in the magnetic field. The map of these variations is called the bias field. The bias field can cause problems for a classifier as the variations in signal intensity are not due to any anatomical differences or difference in features.
 
 Often times a bias will be present across the resulting scans, which negatively affect the segmentation results.  We notice that out of 285 total patients, 210 are not much affected by bias correction however 75 are greatly affected indicating a split in the dataset's distribution. Bias correcting raises results on these samples substantially. Most papers do not speak much the split in domain and how there exists majority and minority features classes. The paper [Automatic Brain Tumor Segmentation with Domain Transfer] (chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://www.cbica.upenn.edu/sbia/Spyridon.Bakas/MICCAI_BraTS/MICCAI_BraTS_2018_proceedings_shortPapers.pdf) is the only one we found who took this topic seriously and made provisions to adjust for it. While most papers have ignored the topic completely, few papers in passing have mentioned that their models performed very poorly on a handful of samples in their validation. 
