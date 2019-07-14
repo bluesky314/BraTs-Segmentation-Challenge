@@ -70,7 +70,7 @@ We use 3D convolutional network with a cascade and multi-stage framework to alle
 Our first network segments the whole tumor and provides a region proposal that is fed into the later cascades. This reduced the memory footprint of the cascades and shows only the relevant regions for quicker learning. Additionally we found using ELU activation function superior to ReLU. For data augmentations we do rotations, random flips and add gaussian noise along with a guassian smoothing filter. We found batch normalization to not work well with the small batch sizes we trained on so we used Instance Norm with much sucess. We use [DropBlock](https://arxiv.org/abs/1810.12890) regularization instead of Dropout.We also use residual connections in each block to facilitate learning.
 
 <div id="container">
-    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/residual.png?raw=true" width="550" height="250" >
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/residual.png?raw=true" width="250" height="250" >
 </div>
 
 
