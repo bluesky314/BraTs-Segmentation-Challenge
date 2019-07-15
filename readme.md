@@ -113,12 +113,55 @@ We see that the gradient term is multiplied by a factor proportional to the loss
 
 Using 8 models trained on each of the above, we create a ensemble that is able to overcome the data distribution split problem and achives consistent results throughout samples. 
 
-2 models on Dice Loss
+* 2 models on Dice Loss
 
-2 Models on Tversky loss focusing on FN
+* 2 Models on Tversky loss focusing on False Negatives
 
-2 models on Tversky loss focusing on FP
+* 2 models on Tversky loss focusing on False Positives
 
-2 models on Power Loss with n=2
+* 2 models on Power Loss with n=2
 
+### Results
+
+
+# Samples
+The first four images are the the four modalities, flair,t1,t1ce and t2, the next image is the network prediction and the last image is the ground truth.
+
+# Whole Tumor
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/whole1.png?raw=true" width="900" height="180" >
+</div>
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/whole3.png?raw=true" width="900" height="180" >
+</div>
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/whole4.png?raw=true" width="900" height="180" >
+</div>
+
+
+
+# Core Tumor
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/core3.png?raw=true" width="900" height="180" >
+</div>
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/core1.png?raw=true" width="900" height="180" >
+</div>
+
+
+
+# Enhancing Tumor
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/enhancing.png?raw=true" width="900" height="180" >
+</div>
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/enhanc1.png?raw=true" width="900" height="180" >
+</div>
 
