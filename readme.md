@@ -153,6 +153,10 @@ The first four images are the the four modalities, flair,t1,t1ce and t2, the nex
     <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/core1.png?raw=true" width="900" height="180" >
 </div>
 
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/core4.png?raw=true" width="900" height="180" >
+</div>
+
 
 
 # Enhancing Tumor
@@ -163,5 +167,9 @@ The first four images are the the four modalities, flair,t1,t1ce and t2, the nex
 
 <div id="container">
     <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/enhanc1.png?raw=true" width="900" height="180" >
+</div>
+
+<div id="container">
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/enchanc2.png?raw=true" width="900" height="180" >
 </div>
 
