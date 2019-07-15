@@ -131,7 +131,7 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  
  
 ### Validation Samples
-The first four images are the the four modalities, flair,t1,t1ce and t2, the next image is the network prediction and the last image is the ground truth.
+The first four images are the the four modalities(flair, t1, t1ce and t2 respectively, the next image is the network prediction and the last image is the ground truth.
 
 ### Whole Tumor
 
