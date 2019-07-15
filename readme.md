@@ -124,10 +124,16 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
 ### Results
 
 
-# Samples
+ Method         | Dice ET   |  Dice WT  | Dice TC | 
+--------------- |:---------:|:---------:|:--------:|
+ *Ours*         | 0.74      |   0.89    |   0.81   |  
+ 
+ 
+ 
+### Validation Samples
 The first four images are the the four modalities, flair,t1,t1ce and t2, the next image is the network prediction and the last image is the ground truth.
 
-# Whole Tumor
+### Whole Tumor
 
 <div id="container">
     <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/whole1.png?raw=true" width="900" height="180" >
@@ -143,7 +149,7 @@ The first four images are the the four modalities, flair,t1,t1ce and t2, the nex
 
 
 
-# Core Tumor
+### Core Tumor
 
 <div id="container">
     <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/core3.png?raw=true" width="900" height="180" >
@@ -159,7 +165,7 @@ The first four images are the the four modalities, flair,t1,t1ce and t2, the nex
 
 
 
-# Enhancing Tumor
+### Enhancing Tumor
 
 <div id="container">
     <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/enhancing.png?raw=true" width="900" height="180" >
