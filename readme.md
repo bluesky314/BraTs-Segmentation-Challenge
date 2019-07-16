@@ -57,9 +57,6 @@ so we use transposed convolutions to better upsample learned feature maps along 
 
 
 
-[comment]: <> (<div id="container">
-    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/unet.png?raw=true" width="550" height="250" >
-</div>)
 
 <div id="container">
     <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/%20%20UnetWholeAnimation.png?raw=true" width="900" height="500" >
@@ -69,7 +66,7 @@ so we use transposed convolutions to better upsample learned feature maps along 
 We use 3D convolutional network with a cascade and multi-stage framework to alleviate class imbalance which is the main difficulty in brain tumor segmentation. The enhancing tumor makes _ %, TC _ % and _ and _ .We used the three stages for segmenting whole, core and enhancing tumor region into one cascade structure. In this way, the later stage network can focus on learning difficult features per class. We can also fit the model with reasonable GPU space and alter pre-processing for different tumor regions. We also use the insight of distribution split to change the architecture of of secondary networks. Due to the large differences in distribution and standard deviations between the modalities, we pass each modality from the region proposal into an additional InputBlock before concatenating them to be processed by the network jointly. The InputBlock is composed of three convolution layers which takes each modality from 1 channel to 4 channels and after concatenation a 16 channel input is passed into the secondary unet of the same structure as before.
 
 <div id="container">
-    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/InputBlockAnimation.png?raw=true" width="320" height="200" >
+    <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/InputBlockAni.png?raw=true" width="320" height="200" >
 </div>
 
 Our first network segments the whole tumor and provides a region proposal that is fed into the later cascades. This reduced the memory footprint of the cascades and shows only the relevant regions for quicker learning. Additionally we found using ELU activation function superior to ReLU. For data augmentations we do rotations, random flips and add gaussian noise along with a guassian smoothing filter. We found batch normalization to not work well with the small batch sizes we trained on so we used Instance Norm with much sucess. We use [DropBlock](https://arxiv.org/abs/1810.12890) regularization instead of Dropout.We also use residual connections in each block to facilitate learning.
