@@ -1,5 +1,7 @@
 In Progress: Some files are old and update will be coming soon.
 
+Summary: A models's lower bound performance is an important metric in a practical clinical settings that is often overlooked in medical research and competitions. In medical datasets the data may have different distributions due to it being collected from multiple sources. We handle the challenge of a distribution split in the dataset by a series of models trained on different loss functions, each handling an aspect of the imbalance, to create an ensemble that provides the best worst-case performance on the BraTs 2018 dataset. For the task of increasing the lower bound on performance we propose a simple modification to the well known Dice loss, which weighs samples linearly, to an exponentiated version that penalizes samples far away from the average in a non-linear fasion. This formulation handles the distribution imbalance by preventing the model from over fixating on the major distribution and bringing comparable performace with minor distributions. We combine our loss with variants of the Tversky loss to create a ensemble that achives homogeneous performance across the validation set.
+
 This repository contains some files from MICCA BraTS segmentation challenge: https://www.med.upenn.edu/sbia/brats2018/data.html
 
 ## Table of Contents
