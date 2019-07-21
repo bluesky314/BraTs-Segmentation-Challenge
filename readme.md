@@ -147,7 +147,7 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  Dice - 2       | 3.62     |   5.22    |   9.02   |  
  Power Loss - 1 | 2.68      |   7.55   |   4.32   |  
  Power Loss - 2 | 2.29      |   5.49    |   5.41   |  
- Ensemble       | **1.53    |   3.47    |   4.09 **  |  
+ Ensemble       | **1.53**    | **3.47**   |   **4.09**   |  
 
  
 ### Validation Samples
