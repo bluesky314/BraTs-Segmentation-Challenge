@@ -129,7 +129,7 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
 
 * 2 models on Power Loss with n=2
 
-### Results
+## Results
 
 
  Method         | Dice ET   |  Dice WT  | Dice TC | 
@@ -137,7 +137,9 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  *Ours*         | 0.74      |   0.89    |   0.81   |  
  
  
- ## Variance of models
+ ### Variance of models
+ 
+ We calculate the variance across Dice, Precision and Recall Scores. We find our ensemble to do the best and models trained on power loss to do better in handling the distribution split that the rest.
  
   Model         |    Dice   |  Precision  | Recall | 
 --------------- |:---------:|:---------:|:--------:|
@@ -150,7 +152,7 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  Ensemble       | **1.53**    | **3.47**   |   **4.09**   |  
 
  
-### Validation Samples
+## Validation Samples
 The first four images are the the four modalities(flair, t1, t1ce and t2 respectively, the next image is the network prediction and the last image is the ground truth.
 
 ### Whole Tumor
