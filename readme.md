@@ -144,7 +144,7 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
 ### Worst Case Scores
  
  
-   Model Model       |   Worst Case Dice |  Worst Case Precision | Worst Case Recall
+   Loss       |   Worst Case Dice |  Worst Case Precision | Worst Case Recall
 --------------- |:---------:| :---------:|:--------:|
  Tversky - 1    | 0.649     |  0.581      | 0.532|
  Tversky - 2    | 0.682     |  0.605      | 0.543|
@@ -157,7 +157,7 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  
  #### Variances
 
-  Model         |    Dice   |  Precision  | Recall | 
+  Loss         |    Dice   |  Precision  | Recall | 
 --------------- |:---------:|:---------:|:--------:|
  Tversky - 1    | 0.0561     |   0.0862    |   0.0949   |  
  Tversky - 2    | 0.0450     |   0.0786    |   0.0843   |  
