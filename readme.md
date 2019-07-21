@@ -141,10 +141,10 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  
  We calculate the worst case scores and variance across Dice, Precision and Recall Scores in the validation set. We find our ensemble to do the best in all cases but one and models trained on power loss to do better in handling the distribution split that the rest.
  
-#### Worst Case Scores
+### Worst Case Scores
  
  
-    Model       |   Worst Case Dice |  Worst Case Precision | Worst Case Recall
+   Model Model       |   Worst Case Dice |  Worst Case Precision | Worst Case Recall
 --------------- |:---------:| :---------:|:--------:|
  Tversky - 1    | 0.649     |  0.581      | 0.532|
  Tversky - 2    | 0.682     |  0.605      | 0.543|
