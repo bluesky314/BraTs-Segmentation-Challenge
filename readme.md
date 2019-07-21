@@ -143,13 +143,25 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  
   Model         |    Dice   |  Precision  | Recall | 
 --------------- |:---------:|:---------:|:--------:|
- Tversky - 1    | 5.61     |   8.62    |   9.49   |  
- Tversky - 2    | 4.50     |   7.86    |   8.43   |  
- Dice - 1       | 3.28      |   4.90    |   7.53   |  
- Dice - 2       | 3.62     |   5.22    |   9.02   |  
- Power Loss - 1 | 2.68      |   7.55   |   4.32   |  
- Power Loss - 2 | 2.29      |   5.49    |   5.41   |  
- Ensemble       | **1.53**    | **3.47**   |   **4.09**   |  
+ Tversky - 1    | 0.0561     |   0.0862    |   0.0949   |  
+ Tversky - 2    | 0.0450     |   0.0786    |   0.0843   |  
+ Dice - 1       | 0.0328      |   0.0490    |   0.0753   |  
+ Dice - 2       | 0.0362     |   0.0522    |   0.0902   |  
+ Power Loss - 1 | 0.0268      |   0.0755   |   0.0432   |  
+ Power Loss - 2 | 0.0229      |   0.0549    |   0.0541   |  
+ Ensemble       | **0.0153**    | **0.0347**   |   **0.0409**   |  
+ 
+ 
+   Model         |   Worst Case Dice   | 
+--------------- |:---------:| 
+ Tversky - 1    | 0.649  |  
+ Tversky - 2    | 0.682  |  
+ Dice - 1       | 0.676  | 
+ Dice - 2       | 0.642  |  
+ Power Loss - 1 | 0.736  |  
+ Power Loss - 2 | 0.772  | 
+ Ensemble       | 0.795  |  
+ 
 
  
 ## Validation Samples
