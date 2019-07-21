@@ -127,8 +127,6 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
 
 * 2 Models on Tversky loss focusing on False Negatives
 
-* 2 models on Tversky loss focusing on False Positives
-
 * 2 models on Power Loss with n=2
 
 ### Results
@@ -139,6 +137,18 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  *Ours*         | 0.74      |   0.89    |   0.81   |  
  
  
+ ## Variance of models
+ 
+  Model         |    Dice   |  Precision  | Recall | 
+--------------- |:---------:|:---------:|:--------:|
+ Tversky - 1    | 5.61     |   8.62    |   9.49   |  
+ Tversky - 2    | 4.50     |   7.86    |   8.43   |  
+ Dice - 1       | 3.28      |   4.90    |   7.53   |  
+ Dice - 2       | 3.62     |   5.22    |   9.02   |  
+ Power Loss - 1 | 2.68      |   7.55   |   4.32   |  
+ Power Loss - 2 | 2.29      |   5.49    |   5.41   |  
+ Ensemble       | **1.53    |   3.47    |   4.09 **  |  
+
  
 ### Validation Samples
 The first four images are the the four modalities(flair, t1, t1ce and t2 respectively, the next image is the network prediction and the last image is the ground truth.
