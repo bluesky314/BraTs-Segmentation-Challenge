@@ -139,7 +139,7 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  
  ### Worst Case Performance and Variance of models
  
- We calculate the worst case scores and variance across Dice, Precision and Recall Scores in the validation set. We find our ensemble to do the best in all cases but one and models trained on power loss to do better in handling the distribution split that the rest.
+ We calculate the worst case scores and standard deviations across Dice, Precision and Recall Scores in the validation set. We find our ensemble to do the best in all cases but one and models trained on power loss to do better in handling the distribution split that the rest.
  
 ### Worst Case Scores
  
@@ -155,18 +155,17 @@ Using 8 models trained on each of the above, we create a ensemble that is able t
  Ensemble       | **0.795** |  **0.739**  | 0.719|
  
  
- #### Variances
+ #### Standard Deviations
 
   Loss         |    Dice   |  Precision  | Recall | 
 --------------- |:---------:|:---------:|:--------:|
- Tversky - 1    | 0.0561     |   0.0862    |   0.0949   |  
- Tversky - 2    | 0.0450     |   0.0786    |   0.0843   |  
- Dice - 1       | 0.0328      |   0.0490    |   0.0753   |  
- Dice - 2       | 0.0362     |   0.0522    |   0.0902   |  
- Power Loss - 1 | 0.0268      |   0.0755   |   0.0432   |  
- Power Loss - 2 | 0.0229      |   0.0549    |   0.0541   |  
- Ensemble       | **0.0153**    | **0.0347**   |   **0.0409**   |  
- 
+ Tversky - 1    | 0.0749     |   0.0928    |   0.0974   |  
+ Tversky - 2    | 0.0670     |   0.0887    |   0.0918   |  
+ Dice - 1       | 0.0573      |   0.0700    |   0.0867   |  
+ Dice - 2       | 0.0602     |   0.0722    |   0.0949   |  
+ Power Loss - 1 | 0.0518      |   0.0869   |   0.0658   |  
+ Power Loss - 2 | 0.0479      |   0.0741    |   0.0735   |  
+ Ensemble       | **0.0391**    | **0.0589**   |   **0.0639**   |  
  
 
  
