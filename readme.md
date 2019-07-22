@@ -6,7 +6,6 @@ A models's lower bound performance is a vital metric in determining trust in pra
 
 This repository contains some files from MICCA BraTS segmentation challenge: https://www.med.upenn.edu/sbia/brats2018/data.html
 
-We found significantly few resources for understanding image segmentation with CNNs available, especially as compared to image classification. So to that end we also made a video explaning how image segmentation works in modern CNNs architectures incoming researchers: [An in-depth look at image segmentation in modern deep learning architectures through the UNet](https://www.youtube.com/watch?v=NzY5IJodjek)
 
 ## Table of Contents
 1. [Dataset](#dataset)
@@ -81,7 +80,7 @@ Our first network segments the whole tumor and provides a region proposal that i
     <img src="https://github.com/bluesky314/BraTs-Segmentation-Challenge/blob/master/images/residual.png?raw=true" width="250" height="250" >
 </div>
 
-
+We found significantly few resources for understanding image segmentation with CNNs available, especially as compared to image classification. So to that end we also made a video explaning how image segmentation works in modern CNNs architectures incoming researchers: [An in-depth look at image segmentation in modern deep learning architectures through the UNet](https://www.youtube.com/watch?v=NzY5IJodjek)
 
 ## Ensembling and Loss Function
 
